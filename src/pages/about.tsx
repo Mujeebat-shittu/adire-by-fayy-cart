@@ -1,16 +1,33 @@
 import Header from "../components/header";
-import wtk from "../assets/wtk.jpg"
+import Logo from "@/assets/logo.jpg";
+import BrandBox from "@/assets/brand-box.jpg";
+import { Dot } from "lucide-react";
 
-function About () {
-    return(
+function About() {
+    return (
         <>
-            <Header/>
-<div className="bg-white text-black flex h-screen items-center justify-center flex-col gap-2">
-            <h1 className="font-2xl border-[#d0d8cd] border-2 p-2">About</h1>
-            <p className="border-[#e5e5e5] border-2">hello</p>
-            <p className="">I'm Adire by Fayy</p>
-            <img src={wtk} alt="" className="w-[300px] h-[300px]" />
-        </div>
+            <Header />
+            <div className="bg-white dark:bg-[#1a1a1a] text-black flex h-screen items-center justify-center flex-col gap-2">
+                <div className="flex absolute flex-col max-w-[400px] md:max-w-[500px] h-[400px] items-center justify-center shadow-2xl bg-[#d0d8cd] dark:bg-[#809679] text-[#1a1a1a] rounded-lg">             
+                        <h1 className="font-bold text-2xl">ABOUT</h1>
+                    <img src={Logo} alt="" className="w-30 h-30 absolute left-0 top-0 rounded-lg" />
+                    <div className="p-4 leading-8 text-lg ">
+                      <p className="inline-flex">
+                        <Dot size={35} color="green"/>Our dresses are made to order, each one created with care, precision, and the artistic touch that defines Adire.
+                        </p>
+                        <p className="inline-flex">
+                        <Dot size={35} color="green"/>This approach allows us to preserve the individuality of every design while ensuring the best quality for you.
+                        </p>
+                        <p className="inline-flex">
+                        <Dot size={35} color="green"/>We’re working towards launching a full ready-to-wear collection soon, so you can easily shop your favourite styles. 
+                        </p>
+                        <p className="inline-flex">
+                        <Dot size={22} color="green"/>Until then, thank you for your love, patience, and constant support.
+                        </p>
+                    </div>
+                    <img src={BrandBox} alt="" className="w-30 h-30 absolute right-0 bottom-0 rounded-lg" />
+                </div>
+            </div>
         </>
     )
 
