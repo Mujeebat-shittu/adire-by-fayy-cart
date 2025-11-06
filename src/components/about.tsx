@@ -8,9 +8,9 @@ function About() {
         <>
             <Header />
             <div className="bg-white dark:bg-[#1a1a1a] text-black flex h-screen items-center justify-center flex-col gap-2">
-                <div className="flex absolute flex-col max-w-[400px] md:max-w-[500px] h-[400px] items-center justify-center shadow-2xl bg-[#d0d8cd] dark:bg-[#809679] text-[#1a1a1a] rounded-lg">             
+                <div className="flex absolute flex-col max-w-[300px] sm:max-w-[400px] md:max-w-[500px] h-[400px] items-center justify-center shadow-2xl bg-[#d0d8cd] dark:bg-[#809679] text-[#1a1a1a] rounded-lg">             
                         <h1 className="font-bold text-2xl">ABOUT</h1>
-                    <img src={Logo} alt="" className="w-30 h-30 absolute left-0 top-0 rounded-lg" />
+                    <img src={Logo} alt="" className="w-20 h-20 sm:w-30 sm:h-30 absolute left-0 top-0 rounded-lg" />
                     <div className="p-4 leading-8 text-lg ">
                       <p className="inline-flex">
                         <Dot size={35} color="green"/>Our dresses are made to order, each one created with care, precision, and the artistic touch that defines Adire.

@@ -9,7 +9,7 @@ const links = [
   { name: "HOME", path: "/", end: true },
   { name: "ABOUT", path: "/about" },
   { name: "PRODUCT", path: "/product" },
-  //   { name: "CART", path: "/cart" },
+  
 ];
 
 function Header() {
