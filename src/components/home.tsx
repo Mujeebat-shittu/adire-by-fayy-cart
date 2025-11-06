@@ -7,8 +7,9 @@ import { Dot } from "lucide-react";
 function Home() {
     return (
         <>
+        <div className="overflow-hidden h-screen">
             <Header />
-            <div className="bg-white dark:bg-[#1a1a1a] text-[#1a1a1a] flex h-screen items-center justify-center flex-col gap-2 overflow-hidden">
+            <div className="bg-white dark:bg-[#1a1a1a] text-[#1a1a1a] flex h-screen items-center justify-center flex-col gap-2">
                 <div className="flex absolute flex-col max-w-[350px] sm:max-w-[400px] md:max-w-[500px] h-[400px] sm:h-[350px] items-center justify-center shadow-2xl bg-[hsl(104,12%,83%)] dark:bg-[#809679] text-black rounded-lg">
                     <h1 className="font-bold text-2xl">HOME</h1>
                     <img src={Logo} alt="" className="w-20 h-20 sm:w-30 sm:h-30 absolute left-0 top-0 rounded-lg" />
@@ -24,6 +25,8 @@ function Home() {
                     <img src={BrandBox} alt="" className="w-20 h-20 sm:w-30 sm:h-30 absolute right-0 bottom-0 rounded-lg" />
                 </div>
             </div>
+        </div>
+            
         </>
     )
 
