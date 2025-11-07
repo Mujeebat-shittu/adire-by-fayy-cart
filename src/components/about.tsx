@@ -8,7 +8,7 @@ function About() {
         <>
         <div className="overflow-hidden">
             <Header />
-            <div className="bg-white dark:bg-[#1a1a1a] text-black flex h-screen items-center justify-center flex-col gap-2">
+            <div className="bg-white dark:bg-[#1a1a1a] text-black flex min-h-screen items-center justify-center flex-col gap-2">
                 <div className="flex absolute flex-col max-w-[350px] sm:max-w-[400px] md:max-w-[500px] h-[600px] sm:h-[500px] items-center justify-center shadow-2xl bg-[#d0d8cd] dark:bg-[#809679] text-[#1a1a1a] rounded-lg">             
                         <h1 className="font-bold text-2xl">ABOUT</h1>
                     <img src={Logo} alt="" className="w-20 h-20 sm:w-30 sm:h-30 absolute left-0 top-0 rounded-lg" />
