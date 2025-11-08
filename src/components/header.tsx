@@ -9,7 +9,7 @@ const links = [
   { name: "HOME", path: "/", end: true },
   { name: "ABOUT", path: "/about" },
   { name: "PRODUCT", path: "/product" },
-  
+
 ];
 
 function Header() {
@@ -27,10 +27,19 @@ function Header() {
         className="icons flex items-center justify-center absolute right-0 lg:hidden mr-6"
         onClick={toggleMenu}
       >
+        {/* order button hidden on large screens */}
+        <div className="lg:hidden flex items-end w-full justify-around font-bold">
+          <button
+            className="w-[100px] p-2 rounded-md border bg-black dark:bg-[#d1d9ce] dark:text-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 text-[#d1d9ce] my-4 cursor-pointer hover:scale-[1.05]"
+          >
+            <a href="https://wa.me/2348126458317">Order Here</a>
+          </button>
+        </div>
+        {/* menu and close icons */}
         {toggle ? (
-          <X className="cursor-pointer ml-5 text-black dark:text-[#d1d9ce]" />
+          <X strokeWidth={5} className="cursor-pointer ml-5 text-black dark:text-[#d1d9ce]" />
         ) : (
-          <Menu className="cursor-pointer ml-5 text-black dark:text-[#d1d9ce]" />
+          <Menu strokeWidth={4} className="cursor-pointer ml-5 text-black dark:text-[#d1d9ce]" />
         )}
       </div>
 
@@ -68,7 +77,7 @@ function Header() {
             </ul>
 
           </div>
-  
+
           <div className="flex gap-2">
             <button
               className="p-2 rounded-md border dark:border-black border-gray-700 dark:text-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#d1d9ce] hover:border-0 text-[#1a1a1a] my-4 cursor-pointer"
@@ -89,10 +98,14 @@ function Header() {
 
 
         {/* Mobile Nav */}
+
+
         <div
           className={`fixed inset-0 z-40 flex flex-col items-center justify-center bg-[#d0d8cd] dark:bg-[#809679] dark:text-[#d0d8cd] transform transition-all duration-300 ease-in-out ${toggle ? "translate-x-0" : "translate-x-full"
             }`}
         >
+
+
           {/* Close button */}
           <button
             onClick={toggleMenu}
@@ -124,11 +137,14 @@ function Header() {
           </ul>
 
 
-          <button
-            className="p-2 rounded-md border dark:border-black border-gray-700 dark:text-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#d1d9ce] hover:border-0 text-[#1a1a1a] my-4 cursor-pointer"
-          >
-            <a href="https://wa.me/2348126458317">Order here</a>
-          </button>
+          <div className=" flex items-center w-full justify-center font-bold">
+            <button
+              className="w-[200px] p-2 rounded-md border bg-black dark:bg-[#d1d9ce] dark:text-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 text-[#d1d9ce] my-4 cursor-pointer hover:scale-[1.05]"
+            >
+              <a href="https://wa.me/2348126458317">ORDER HERE</a>
+            </button>
+          </div>
+
 
           <button
             className="p-2 rounded-md border dark:border-black border-gray-700 dark:text-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#d1d9ce] hover:border-0 text-[#1a1a1a] my-4 cursor-pointer"
@@ -139,6 +155,7 @@ function Header() {
           <div className="">
             <ThemeToggle />
           </div>
+
 
         </div>
 

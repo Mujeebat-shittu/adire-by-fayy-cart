@@ -4,7 +4,7 @@ import ImageThree from "../assets/long-flare.jpg"
 import ImageFour from "../assets/short-flare-gown.png"
 import ImageFive from "../assets/long-parts-couple.jpg"
 import ImageSix from "../assets/short-nikka.png"
-// import ImageSeven from "../assets/short-skirt.jpg"
+import ImageSeven from "../assets/short-skirt.jpg"
 import ImageEight from "../assets/boubou-gown.png"
 
 type Product = {
@@ -70,7 +70,7 @@ export const products: Product[] = [
         title:"SHORT SKIRT",
         description: "Simple, stylish, and full of personality. The Short Skirt brings a playful edge to your Adire collection, pairing easily with tops for a laid-back or polished look. Designed for comfort and movement, it’s a wardrobe staple that celebrates effortless style.",
         price: "₦4,000",
-        image: undefined ,
+        image: ImageSeven ,
         category: "skirts",
     },
     {
