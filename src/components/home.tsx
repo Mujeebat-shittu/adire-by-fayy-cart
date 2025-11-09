@@ -2,7 +2,6 @@ import Header from "../components/header"
 import Logo from "@/assets/logo.jpg";
 import BrandBox from "@/assets/brand-box.jpg";
 import { Dot } from "lucide-react";
-import { Boxes } from "@/components/ui/shadcn-io/background-boxes";
 
 
 
@@ -10,9 +9,6 @@ function Home() {
     return (
         <>
             <Header />
-
-            <div className="relative min-h-screen">
-                <Boxes className="absolute inset-0" />
 
                 <div className="bg-white dark:bg-[#1a1a1a] text-[#1a1a1a] flex min-h-screen items-center justify-center flex-col gap-2">
                     <div className="flex absolute flex-col max-w-[350px] sm:max-w-[400px] md:max-w-[500px] h-[500px] sm:h-[350px] items-center justify-center shadow-2xl bg-[hsl(104,12%,83%)] dark:bg-[#809679] text-black rounded-lg">
@@ -30,7 +26,6 @@ function Home() {
                         <img src={BrandBox} alt="" className="w-20 h-20 sm:w-30 sm:h-30 absolute right-0 bottom-0 rounded-lg" />
                     </div>
                 </div>
-            </div>
 
 
 
