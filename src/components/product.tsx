@@ -1,6 +1,5 @@
 import Header from "../components/header";
 import { useState} from "react";
-// import { NavLink } from "react-router-dom";
 import {
     Card,
     CardContent,
@@ -26,6 +25,7 @@ function Product() {
     return (
         <>
             <Header />
+            
             <main className="bg-white dark:bg-black text-black flex min-h-screen items-center justify-center flex-col gap-2 my-4">
 
                 <div className="flex gap-2 my-2">
@@ -54,6 +54,8 @@ function Product() {
                         Skirts
                     </button>
                 </div>
+
+                
 
                 
 
