@@ -80,10 +80,10 @@ function Header() {
 
           <div className="flex gap-2">
             <button
-              className="p-2 rounded-md border dark:border-black border-gray-700 dark:text-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#d1d9ce] hover:border-0 text-[#1a1a1a] my-4 cursor-pointer"
-            >
-              <a href="https://wa.me/2348126458317">Order here</a>
-            </button>
+            className="w-[100px] p-2 rounded-md border bg-black dark:bg-[#d1d9ce] dark:text-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 text-[#d1d9ce] my-4 cursor-pointer hover:scale-[1.05]"
+          >
+            <a href="https://wa.me/2348126458317">Order Here</a>
+          </button>
 
             <button
               className="p-2 rounded-md border dark:border-black border-gray-700 dark:text-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#d1d9ce] hover:border-0 text-[#1a1a1a] my-4 cursor-pointer"
