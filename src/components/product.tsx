@@ -27,7 +27,7 @@ function Product() {
         <>
             <Header />
             
-            <main className="bg-conic from-white to-[#d1d9ce] dark:bg-conic dark:from-black dark:to-[#809679] text-black flex min-h-screen items-center justify-center flex-col gap-2 my-4">
+            <main className="bg-linear-to-r to-white from-[#d1d9ce] dark:bg-linear-to-r dark:to-black dark:from-[#809679] text-black flex min-h-screen items-center justify-center flex-col gap-2 my-4">
 
                 <div className="flex gap-2 my-2">
                     <button
