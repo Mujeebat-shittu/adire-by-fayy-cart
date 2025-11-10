@@ -14,6 +14,7 @@ type Product = {
     price: string;
     image: string | undefined;
     category: string;
+    note: string;
 };
 
 export const products: Product[] = [
@@ -24,6 +25,7 @@ export const products: Product[] = [
         price: "₦10,000",
         image: ImageOne ,
         category: "gowns",
+        note: "A chic, above-the-knee gown with layered steps that add texture and movement.",
     },
     {
         id: 2,
@@ -32,6 +34,7 @@ export const products: Product[] = [
         price: "₦22,000",
         image: ImageTwo ,
         category: "gowns",
+        note: "A graceful, full-length gown featuring soft, cascading steps for effortless elegance.",
     },
     {
         id: 3,
@@ -40,6 +43,7 @@ export const products: Product[] = [
         price: "₦12,000",
         image: ImageThree ,
         category: "gowns",
+        note: "A flowing, ankle-length gown with a flattering flare that moves beautifully.",
     },
     {
         id: 4,
@@ -48,6 +52,7 @@ export const products: Product[] = [
         price: "₦6,000",
         image: ImageFour ,
         category: "gowns",
+        note: "A breezy, short gown with a flared hem for a playful, feminine touch.",
     },
     {
         id: 5,
@@ -56,6 +61,7 @@ export const products: Product[] = [
         price: "₦8,000",
         image: ImageFive ,
         category: "pants",
+        note: "Classic full-length trousers tailored for comfort and modern style.",
     },
     {
         id: 6,
@@ -64,6 +70,7 @@ export const products: Product[] = [
         price: "₦5,000",
         image: ImageSix ,
         category: "pants",
+        note: "Easygoing above-the-knee shorts with a relaxed fit and cultural flair.",
     },
     {
         id: 7,
@@ -72,6 +79,7 @@ export const products: Product[] = [
         price: "₦4,000",
         image: ImageSeven ,
         category: "skirts",
+        note: "A simple, stylish skirt that sits above the knee and pairs effortlessly with any top.",
     },
     {
         id: 8,
@@ -80,6 +88,7 @@ export const products: Product[] = [
         price: "₦16,000",
         image: ImageEight ,
         category: "gowns",
+        note: "A loose, free-flowing gown that combines comfort with timeless Adire elegance.",
     },
 
 ]

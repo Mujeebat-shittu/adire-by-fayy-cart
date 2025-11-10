@@ -130,20 +130,19 @@ function Header() {
 
         {/* Nav links */}
         <ul className="flex flex-col gap-6 text-lg font-semibold text-gray-800 dark:text-[#d0d8cd]">
-          {links.map((link, index) => (
+          {links.map((link) => (
             <li key={link.name}>
               <NavLink
                 to={link.path}
                 end={link.end}
                 onClick={toggleMenu}
                 className={({ isActive }) =>
-                  `relative flex gap-2 pb-1 capitalize ${isActive
+                  `relative flex gap-2 pb-1 hover:scale-[1.02] capitalize ${isActive
                     ? "text-black after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[3px] after:bg-black pr-4"
                     : "text-gray-800"
                   }`
                 }
               >
-                <span className="font-bold">0{index}</span>
                 <span className="font-normal">{link.name}</span>
               </NavLink>
             </li>
