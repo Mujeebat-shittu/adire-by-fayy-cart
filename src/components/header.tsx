@@ -64,7 +64,7 @@ function Header() {
 
       {/* general features for all screen size */}
 
-      <div className="flex absolute right-2 items-center justify-end">
+      <div className="flex gap-2 absolute right-2 items-center justify-end">
         <button
           className="w-[100px] p-2 rounded-md border bg-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 text-[#d1d9ce] my-4 cursor-pointer hover:scale-[1.05] font-bold"
         >
@@ -92,6 +92,7 @@ function Header() {
             <SiTiktok />
           </a>
         </button>
+        
         {/* toggle menu icon */}
         <div
           className="icons flex lg:hidden"
@@ -100,9 +101,9 @@ function Header() {
 
           {/* menu and close icons */}
           {toggle ? (
-            <X strokeWidth={5} className="cursor-pointer ml-5 text-black dark:text-[#d1d9ce]" />
+            <X strokeWidth={5} className="cursor-pointer ml-4 text-black dark:text-[#d1d9ce]" />
           ) : (
-            <Menu strokeWidth={4} className="cursor-pointer ml-5 text-black dark:text-[#d1d9ce]" />
+            <Menu strokeWidth={4} className="cursor-pointer ml-4 text-black dark:text-[#d1d9ce]" />
           )}
         </div>
       </div>
