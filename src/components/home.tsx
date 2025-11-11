@@ -14,14 +14,14 @@ function Home() {
                     <img src={Logo} alt="" className="w-30 h-30 absolute left-0 top-0 rounded-lg" />
                     <div className="p-4 leading-8 text-lg ">
                         <p className="inline-flex">
-                            <Dot size={23} color="green" />Adire by Fayy is a brand that makes ready to wear handmade adire designs.
+                            <Dot className="w-15" color="green" />Adire by Fayy is a brand that makes ready to wear handmade adire designs.
                         </p>
                         <p className="inline-flex">
-                            <Dot size={35} color="green" />Each Adire piece is made to order, created just for you with care and intention.
+                            <Dot className="w-25" color="green" />Each Adire piece is made to order, created just for you with care and intention.
                             Handcrafted, expressive, and rooted in tradition.
                         </p>
                     </div>
-                    <img src={BrandBox} alt="" className="w-30 h-30 absolute right-0 bottom-0 rounded-lg" />
+                    <img src={BrandBox} alt="" className="w-20 h-20 sm:w-30 sm:h-30 absolute right-0 bottom-0 rounded-lg" />
                 </div>
             </div>
         </>

@@ -23,7 +23,7 @@ function About() {
                         <Dot size={45} color="green"/>We’re working towards launching a full ready-to-wear collection soon, so you can easily shop your favourite styles. 
                         </p>
                         <p className="inline-flex">
-                        <Dot size={35} color="green"/>Until then, thank you for your love, patience, and constant support.
+                        <Dot size={27} color="green"/>Until then, thank you for your love, patience, and constant support.
                         </p>
                     </div>
                     <img src={BrandBox} alt="" className="w-20 h-20 sm:w-30 sm:h-30 absolute right-0 bottom-0 rounded-lg" />
