@@ -64,7 +64,7 @@ function Header() {
 
       {/* general features for all screen size */}
 
-      <div className="flex gap-2 items-center justify-end">
+      <div className="flex absolute right-2 items-center justify-end">
         <button
           className="w-[100px] p-2 rounded-md border bg-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 text-[#d1d9ce] my-4 cursor-pointer hover:scale-[1.05] font-bold"
         >
@@ -76,28 +76,25 @@ function Header() {
             Order Here</a>
         </button>
 
-        <div className="flex">
-          <ThemeToggle />
-        </div>
+        {/* theme toggle component */}
+        <ThemeToggle />
 
-        <div className="flex">
-          <button
-            className="p-2 rounded-md border dark:border-black border-gray-700 dark:text-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#d1d9ce] hover:border-0 text-[#1a1a1a] my-4 cursor-pointer"
+        {/* tiktok icon */}
+        <button
+          className="p-2 rounded-md border dark:border-black border-gray-700 dark:text-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-[#d1d9ce] hover:border-0 text-[#1a1a1a] my-4 cursor-pointer"
+        >
+          <a
+            href="https://www.tiktok.com/@oghenefayjiro?_t=ZS-90xGfzGFpTE&_r=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-pink-500 transition-colors"
           >
-            <a
-              href="https://www.tiktok.com/@oghenefayjiro?_t=ZS-90xGfzGFpTE&_r=1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-pink-500 transition-colors"
-            >
-              <SiTiktok />
-            </a>
-          </button>
-        </div>
-
-
+            <SiTiktok />
+          </a>
+        </button>
+        {/* toggle menu icon */}
         <div
-          className="icons flex lg:hidden mr-6"
+          className="icons flex lg:hidden"
           onClick={toggleMenu}
         >
 
