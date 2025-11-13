@@ -12,7 +12,7 @@ function About() {
                 <div className="flex absolute flex-col max-w-[350px] sm:max-w-[400px] md:max-w-[500px] h-[600px] sm:h-[500px] items-center justify-center shadow-2xl bg-[#d0d8cd] dark:bg-[#809679] text-[#1a1a1a] rounded-lg">             
                         <h1 className="font-bold text-2xl">ABOUT</h1>
                     <img src={Logo} alt="" className="w-20 h-20 sm:w-30 sm:h-30 absolute left-0 top-0 rounded-lg" />
-                    <div className="p-4 leading-8 sm:text-lg ">
+                    <div className="p-4 leading-8 sm:text-lg slide-in-left ">
                       <p className="inline-flex">
                         <Dot size={45} color="green"/>Our dresses are made to order, each one created with care, precision, and the artistic touch that defines Adire.
                         </p>

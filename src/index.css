@@ -1,6 +1,67 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* index.css or App.css */
+@layer utilities {
+  /* Slide in from left */
+  .slide-in-left {
+    animation: slideInLeft 200ms ease-out forwards;
+  }
+
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(-200%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Slide in from right */
+  .slide-in-right {
+    animation: slideInRight 200ms ease-out forwards;
+  }
+
+  @keyframes slideInRight {
+    0% {
+      transform: translateX(200%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Slide in from top */
+  .slide-in-top {
+    animation: slideInTop 0.7s ease-out forwards;
+  }
+
+  @keyframes slideInTop {
+    0% {
+      transform: translateY(-200%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  /* Slide in from bottom */
+  .slide-in-bottom {
+  animation: slideInBottom 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+
+  @keyframes slideInBottom {
+    0% {
+      transform: translateY(200%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
