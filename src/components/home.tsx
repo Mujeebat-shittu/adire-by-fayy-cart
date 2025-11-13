@@ -28,7 +28,7 @@ function Home() {
                 
 
                 {/* Stay Connected section */}
-                <div className="relative z-10 mt-[520px] flex flex-col items-center text-center gap-2 px-6 slide-in-bottom">
+                <div className="relative z-10 mt-[600px] sm:mt-[520px] flex flex-col items-center text-center gap-2 px-6 slide-in-bottom">
                     <div className="w-12 h-0.5 bg-[#809679]/40 dark:bg-[#d1d9ce]/30 my-3"></div>
 
                     <p className="text-[#2f2f2f] dark:text-[#d1d9ce] text-lg font-medium tracking-wide">
