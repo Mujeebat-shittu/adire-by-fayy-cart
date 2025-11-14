@@ -22,7 +22,7 @@ function Header() {
 
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#d0d8cd] dark:bg-[#809679] h-20 flex items-center justify-between px-4">
+    <header className="sticky top-0 z-50 w-full bg-[#d0d8cd] dark:bg-[#809679] h-18 lg:h-20 flex items-center justify-between px-4">
       {/* Logo */}
       <div>
         <img src={Logo} alt="Logo" className="w-15 ml-4" />
