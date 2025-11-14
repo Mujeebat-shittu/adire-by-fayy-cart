@@ -14,7 +14,7 @@ function Home() {
                 <div className="flex absolute flex-col max-w-[350px] md:max-w-[500px] h-[450px] sm:h-[350px] items-center justify-center shadow-2xl bg-[hsl(104,12%,83%)] dark:bg-[#809679] text-black rounded-lg">
                     <h1 className="font-bold text-2xl">HOME</h1>
                     <img src={Logo} alt="" className="w-20 h-20 sm:w-30 sm:h-30 absolute left-0 top-0 rounded-lg" />
-                    <div className="p-4 leading-8 text-lg slide-in-left">
+                    <div className="p-4 leading-8 sm:text-lg slide-in-left">
                         <p className="inline-flex ">
                             <Dot className="w-15" color="green" />Adire by Fayy is a brand that makes ready to wear handmade adire designs.
                         </p>

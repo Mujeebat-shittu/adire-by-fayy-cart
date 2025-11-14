@@ -28,9 +28,9 @@ function Description() {
                         <CardContent className="text-left">
                             <img src={product.image} alt="" className="h-[270px] w-auto mx-auto" />
                             <CardDescription className="text-normal">
-                                <p className="text-lg font-bold ">{product.title}</p>
-                                <p className="text-lg"> <span className="font-bold">Description:</span> {product.description}</p>
-                                <p className="text-black text-lg font-bold">{product.price}</p>
+                                <p className="sm:text-lg font-bold ">{product.title}</p>
+                                <p className="sm:text-lg"> <span className="font-bold">Description:</span> {product.description}</p>
+                                <p className="text-black sm:text-lg font-bold">{product.price}</p>
 
                             </CardDescription>
                             <button
