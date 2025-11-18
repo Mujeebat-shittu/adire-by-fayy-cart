@@ -1,12 +1,9 @@
-// import { useContext, useState } from "react";
 import { useCart } from "@/context-and-reducer/CartContext";
 import Header from "./header";
 import { CartItem } from "@/context-and-reducer/CartContext";
-// import { ShoppingCart } from "lucide-react";
 import { Trash2 } from "lucide-react";
 import { Plus, Minus } from "lucide-react";
 import toast from "react-hot-toast";
-// import 
 
 
 export default function Cart() {

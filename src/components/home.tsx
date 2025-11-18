@@ -2,8 +2,7 @@ import Header from "../components/header"
 import Logo from "@/assets/logo.jpg";
 import BrandBox from "@/assets/brand-box.jpg";
 import { Dot } from "lucide-react";
-import { SiInstagram } from "react-icons/si";
-import { SiTiktok } from "react-icons/si";
+import { SiInstagram, SiTiktok } from "react-icons/si";
 
 
 function Home() {
