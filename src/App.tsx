@@ -3,6 +3,8 @@ import Home from "./pages/home"
 import About from "./pages/about"
 import Product from "./pages/product"
 import Cart from "./pages/cart"
+import Create from "./pages/create"
+import Description from "./pages/description"
 import { Toaster } from "react-hot-toast"
 
 
@@ -18,6 +20,8 @@ function App() {
       <Route path="/about" element={<About/>}/>
       <Route path="/product" element={<Product/>}/>
       <Route path="/cart" element={<Cart/>}/>
+      <Route path="/create" element={<Create/>}/>
+      <Route path="/product/:id" element={<Description/>}/>
     </Routes>
     </BrowserRouter>
     </>

@@ -7,7 +7,7 @@ type Product = {
     title: string;
     description: string;
     price: number;
-    image_url?: string;
+    image?: string;
     category: string;
 };
 
@@ -35,7 +35,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         setLoading(true);
         const { data, error } = await supabase
         .from("products")
-            .select('*');
+            .select();
             
 
             if (error) {
