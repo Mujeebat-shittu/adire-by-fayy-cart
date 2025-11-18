@@ -4,11 +4,18 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
+<<<<<<< HEAD
 
+=======
+>>>>>>> a9455d908da187ba3b4c88641f0ff42deb8456c2
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a9455d908da187ba3b4c88641f0ff42deb8456c2
 }
