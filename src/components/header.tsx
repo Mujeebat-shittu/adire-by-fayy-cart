@@ -1,15 +1,15 @@
 import Logo from "../assets/logo.jpg"
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ThemeToggle from "./themeToggle";
 
 
 const links = [
-  { name: "HOME", path: "/", end: true },
-  { name: "ABOUT", path: "/about" },
-  { name: "PRODUCT", path: "/product" },
-  { name: "CART", path: "/cart"},
+  { id:1, name: "HOME", path: "/", end: true },
+  { id:2, name: "ABOUT", path: "/about" },
+  { id:3, name: "PRODUCT", path: "/product" },
+  { id:4, name: <ShoppingCart className="text-black"/>, path: "/cart"},
 
 
 ];
@@ -37,7 +37,7 @@ function Header() {
           <div className="flex items-end justify-center mx-auto">
             <ul className="flex flex-row gap-10 cursor-pointer">
               {links.map((link) => (
-                <li key={link.name}>
+                <li key={link.id}>
                   <NavLink
                     to={link.path}
                     end={link.end}
@@ -115,7 +115,7 @@ function Header() {
         {/* Nav links */}
         <ul className="flex flex-col gap-6 text-lg font-semibold text-gray-800 dark:text-[#d0d8cd]">
           {links.map((link) => (
-            <li key={link.name}>
+            <li key={link.id}>
               <NavLink
                 to={link.path}
                 end={link.end}

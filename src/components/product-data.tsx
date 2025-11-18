@@ -86,7 +86,7 @@ function ProductCard() {
                     {filteredProducts?.map((product, index) => (
                         <Card 
                             key={product.id}
-                            className="max-w-[350px] md:w-[260px] lg:w-[300px] bg-[#d1d9ce] dark:bg-[#809679] dark:text-[#1a1a1a] py-6 px-8 flex flex-col items-center justify-center text-left hover:scale-[1.07] hover:translate-y-3 cursor-pointer ring-2 ring-[#d0d8cd]/50 hover:ring-[#d0d8cd]/80 slide-in-bottom"
+                            className="max-w-[350px] md:w-[260px] lg:w-[300px] bg-[#d1d9ce] dark:bg-[#809679] dark:text-[#1a1a1a] py-6 px-8 flex flex-col items-center justify-center text-left hover:scale-[1.07] hover:translate-y-3 cursor-pointer ring-2 ring-[#d0d8cd]/50 hover:ring-[#d0d8cd]/80 slide-in-bottom rounded-lg"
                             style={{ animationDelay: `${index * 0.4}s` }}
                         >
                             <CardContent className="text-left">
