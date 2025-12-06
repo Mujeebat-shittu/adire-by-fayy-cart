@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
 import reducer, { initialState } from "./reducer"
+import { Product } from "@/data/product";
 
 
 export const CartContext = createContext<CartContextType | null>(null);
@@ -11,12 +12,26 @@ export type CartItem = {
     numericPrice: number; // 10000 — for calculation
     image: string;
     quantity: number;
+    description: string;
 };
+
+type CartItemDescription = {
+  id: number,
+    title: string,
+    price: string,
+    numericPrice: number,
+    image: string,
+    quantity: number,
+    description: string,
+    category: string,
+    note: string
+}
 
 export type CartContextType = {
     total: number;
-    products: CartItem[];
-    addToCart: (product: CartItem) => void;
+    product: Product[];
+    cart: CartItem[] ;
+    addToCart: (product: Product | CartItem) => void;
     removeFromCart: (product: CartItem) => void;
     reduceQuantity: (product: CartItem) => void;
     updatePrice: (products: CartItem[]) => void;
@@ -26,20 +41,20 @@ export type CartContextType = {
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    const addToCart = (product: CartItem) => {
-        const existingItem = state.products.find(item => item.id === product.id)
+    const addToCart = (product: Product | CartItem) => {
+        const existingItem = state.cart.find(item => item.id === product.id)
 
-        let updatedBasket: CartItem[];
+        let updatedBasket: CartItem[] | CartItemDescription;
 
         if (existingItem) {
-            updatedBasket = state.products.map(item =>
+            updatedBasket = state.cart.map(item =>
                 item.id === product.id
                     ? { ...item, quantity: item.quantity + 1 }
                     : item
             );
         } else {
             const newProduct = { ...product, quantity: 1 };
-            updatedBasket = [...state.products, newProduct]
+            updatedBasket = [...state.cart, newProduct]
         }
 
         dispatch({
@@ -49,9 +64,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
         updatePrice(updatedBasket);
     }
+    
 
     const reduceQuantity = (product: CartItem) => {
-        const existingItem = state.products.find(item => item.id === product.id);
+        const existingItem = state.cart.find(item => item.id === product.id);
 
         if (!existingItem) return; // nothing to remove
 
@@ -59,14 +75,14 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
         if (existingItem.quantity > 1) {
             // Decrease quantity by 1
-            updatedBasket = state.products.map(item =>
+            updatedBasket = state.cart.map(item =>
                 item.id === product.id
                     ? { ...item, quantity: item.quantity - 1 }
                     : item
             );
         } else {
             // Remove item completely if quantity becomes 0
-            updatedBasket = state.products.filter(item => item.id !== product.id);
+            updatedBasket = state.cart.filter(item => item.id !== product.id);
         }
 
         dispatch({
@@ -78,7 +94,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const removeFromCart = (product: CartItem) => {
-        const updatedBasket = state.products.filter(
+        const updatedBasket = state.cart.filter(
             (currentProduct: CartItem) => currentProduct.title !== product.title);
 
         updatePrice(updatedBasket);
@@ -108,10 +124,17 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     }
 
+//     const totalQuantity = state.cart.reduce(
+//   (acc, item) => acc + item.quantity,
+//   0
+// );
+
+
 
     const value: CartContextType = {
         total: state.total,
-        products: state.products,
+        product: state.product,
+        cart: state.cart,
         addToCart,
         removeFromCart,
         updatePrice,

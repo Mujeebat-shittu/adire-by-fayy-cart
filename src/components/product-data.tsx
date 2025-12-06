@@ -8,29 +8,19 @@ import {
 import {products} from "@/data/product"
 import { Link } from "react-router-dom";
 import { useCart } from "@/context-and-reducer/CartContext";
-import { CartItem } from "@/context-and-reducer/reducer";
-import toast from "react-hot-toast";
 import { Product } from "@/data/product";
 
                                                      
 
 function ProductCard() {
 
-    const transformToCartItem = (product: Product): CartItem => ({
-  id: product.id,
-  title: product.title,
-  price: product.price,
-  numericPrice: Number(product.price.replace(/[^0-9.-]+/g, "")),
-  image: product.image,
-  quantity: 1
-});
+   
 
 
     const {addToCart} = useCart()
 
-    const handleAdd = (product: CartItem) => {
+    const handleAdd = (product: Product) => {
         addToCart(product);
-        toast.success(`You've added ${product.title} to cart `)
     }
 
        const [filterStatus, setFilterStatus] = useState("all"); // all | skirt | pants | gowns
@@ -99,7 +89,7 @@ function ProductCard() {
                                 </CardDescription>
                                 </Link>
                                 <button
-                                onClick={() => handleAdd(transformToCartItem(product))}
+                                onClick={() => handleAdd((product))}
                                 className="w-[100px] p-2 rounded-md border bg-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 text-[#d1d9ce] my-4 cursor-pointer hover:scale-[1.05] font-bold"
                             >     
                                     Add to Cart

@@ -1,5 +1,6 @@
 // import { useReducer } from "react";
-// import { products } from "@/data/product";
+import { products } from "@/data/product";
+import { Product } from "@/data/product";
 
 
 export type CartItem = {
@@ -9,16 +10,19 @@ export type CartItem = {
     numericPrice: number; // 10000 — for calculation
     image: string;
     quantity: number;
+    description: string;
 };
 
-export const initialState: {total:number; products: CartItem[]} = {
+export const initialState: {total:number; product: Product[], cart:CartItem[]} = {
     total: 0,
-    products: [],
+    cart: [] as CartItem[],
+    product: products
 }
 
 type State = {
     total: number;
-    products: CartItem[];
+    cart: CartItem[];
+    product: Product[];
 };
 
 type Action =
@@ -34,12 +38,12 @@ const cartReducer = (state: State, action: Action) => {
         case 'addItem':
             return {
                 ...state,
-                products: action.payload
+                cart: action.payload
             };
         case 'removeItem':
             return {
                 ...state,
-                products: action.payload
+                cart: action.payload
             };
         case 'updatePrice':
             return {
@@ -49,24 +53,14 @@ const cartReducer = (state: State, action: Action) => {
         case 'emptyCart':
             return {
                 ...state,
-                products: [],
+                cart: [],
                 total: 0
             };
         case 'reduceQuantity':
             return {
                 ...state,
-                products: action.payload
+                cart: action.payload
             };
-        // case 'isEmpty':
-        //     return {
-        //         ...state,
-        //         products: action.payload
-        //     };
-        // case 'totalItems':
-        //     return {
-        //         ...state,
-        //         products: action.payload
-        //     };
 
         default:
             return state

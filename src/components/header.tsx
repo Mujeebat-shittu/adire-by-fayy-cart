@@ -3,19 +3,28 @@ import { Menu, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ThemeToggle from "./themeToggle";
+import { CartItem } from "@/context-and-reducer/reducer";
+import { useCart } from "@/context-and-reducer/CartContext";
 
 
 const links = [
-  { id:1, name: "HOME", path: "/", end: true },
-  { id:2, name: "ABOUT", path: "/about" },
-  { id:3, name: "PRODUCT", path: "/product" },
-  { id:4, name: <ShoppingCart className="text-black"/>, path: "/cart"},
-
+  { id: 1, name: "HOME", path: "/", end: true },
+  { id: 2, name: "ABOUT", path: "/about" },
+  { id: 3, name: "PRODUCT", path: "/product" },
+  { id: 4, name: "CART", path: "/cart" },
 
 ];
 
-function Header() {
+const menuLinks = links.slice(0, 3);
+const specialLink = links[3];
 
+
+function Header() {
+  const { cart } = useCart()
+
+  const totalQuantity = cart.reduce((acc: number, item: CartItem) => {
+    return acc + item.quantity;
+  }, 0);
 
   const [toggle, setToggle] = useState(false);
   const toggleMenu = () => {
@@ -33,33 +42,33 @@ function Header() {
 
       {/* nav desktop */}
 
-        <div className="hidden lg:flex flex-row px-6 py-4 gap-2 justify-between items-center text-white  bg-[rgba(255,255,255,0.06)] w-full mx-auto">
-          <div className="flex items-end justify-center mx-auto">
-            <ul className="flex flex-row gap-10 cursor-pointer">
-              {links.map((link) => (
-                <li key={link.id}>
-                  <NavLink
-                    to={link.path}
-                    end={link.end}
-                    className={({ isActive }) =>
-                      `relative block pb-3 capitalize ${isActive
-                        ? "text-[#809679] dark:text-[#d1d9ce] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-black"
-                        : "text-black"
-                      }`
-                    }
-                  >
-                    <div className="flex gap-2">
-                      <span className="font-normal">{link.name}</span>
-                    </div>
+      <div className="hidden lg:flex flex-row px-6 py-4 gap-2 justify-between items-center text-white  bg-[rgba(255,255,255,0.06)] w-full mx-auto">
+        <div className="flex items-end justify-center mx-auto">
+          <ul className="flex flex-row gap-10 cursor-pointer">
+            {links.map((link) => (
+              <li key={link.id}>
+                <NavLink
+                  to={link.path}
+                  end={link.end}
+                  className={({ isActive }) =>
+                    `relative block pb-3 capitalize ${isActive
+                      ? "text-[#809679] dark:text-[#d1d9ce] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-black"
+                      : "text-black"
+                    }`
+                  }
+                >
+                  <div className="flex gap-2">
+                    <span className="font-normal">{link.name}</span>
+                  </div>
 
-                  </NavLink>
-                </li>
-              ))}
+                </NavLink>
+              </li>
+            ))}
 
-            </ul>
+          </ul>
 
-          </div>
         </div>
+      </div>
 
       {/* general features for all screen size */}
 
@@ -75,10 +84,23 @@ function Header() {
             Order Here</a>
         </button>
 
+        <div className="relative">
+          <NavLink
+          to={specialLink.path}>
+          <span className="text-xs text-[#d1d9ce] bg-black absolute right-0 -top-4 rounded-full px-2 py-1">
+            {totalQuantity}</span>
+          <ShoppingCart className="text-black" />
+        </NavLink>
+        </div>
+
+        
+
+
+
         {/* theme toggle component */}
         <ThemeToggle />
 
-        
+
         {/* toggle menu icon */}
         <div
           className="icons flex lg:hidden"
@@ -114,7 +136,7 @@ function Header() {
 
         {/* Nav links */}
         <ul className="flex flex-col gap-6 text-lg font-semibold text-gray-800 dark:text-[#d0d8cd]">
-          {links.map((link) => (
+          {menuLinks.map((link) => (
             <li key={link.id}>
               <NavLink
                 to={link.path}

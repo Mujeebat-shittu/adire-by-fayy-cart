@@ -3,27 +3,26 @@ import Header from "./header";
 import { CartItem } from "@/context-and-reducer/CartContext";
 import { Trash2 } from "lucide-react";
 import { Plus, Minus } from "lucide-react";
-import toast from "react-hot-toast";
 
 
 export default function Cart() {
 
-  const { products, total } = useCart();
+
+  const { cart, total } = useCart();
 
   const { removeFromCart, addToCart, reduceQuantity } = useCart()
 
-  const handleRemove = (product: CartItem) => {
-    reduceQuantity(product);
-    // toast.success(`You've added ${product.title} to cart `)
+
+  const handleRemove = (item: CartItem) => {
+    reduceQuantity(item);
   }
 
-  const handleAdd = (product: CartItem) => {
-    addToCart(product);
-    toast.success(`You've added ${product.title} to cart `)
+  const handleAdd = (item: CartItem) => {
+    addToCart(item);
   }
 
-  const handleDelete = (product: CartItem) => {
-    removeFromCart(product)
+  const handleDelete = (item: CartItem) => {
+    removeFromCart(item)
   }
 
 
@@ -45,43 +44,43 @@ export default function Cart() {
       <div className="bg-linear-to-r from-white to-[#d1d9ce] dark:bg-linear-to-r dark:from-[#1a1a1a] dark:to-[#809679] dark:text-[#d1d9ce] flex min-h-screen items-center justify-center flex-col gap-2">
         <div className="flex gap-5 justify-center items-center">
           <h3 className="font-bold text-xl">Your Cart</h3>
-        <p className="font-bold text-lg">Total: {total}</p>
+        <p className="font-bold text-lg">Total: ₦{total}.00</p>
         </div>
         
 
 
-        {products.map((product, index) => (
+        {cart.map((item, index) => (
           <div key={index} className="flex flex-row gap-5 my-4 items-center justify-center p-4 rounded-2xl">
             <div className="">
-              <img src={product.image} alt={product.title} className="w-30 rounded-2xl" />
+              <img src={item.image} alt={item.title} className="w-30 rounded-2xl" />
             </div>
             <div className="">
               <div>
-                <h3 className="text-left text-lg font-bold text-(--dark-grayish-blue)">{product.title}</h3>
+                <h3 className="text-left text-lg font-bold text-(--dark-grayish-blue)">{item.title}</h3>
               </div>
               <div className="text-lg font-semibold text-(--dark-grayish-blue)">
-                    <p>Price: {product.numericPrice}.00</p>
-                <p className="text-lg font-semibold text-(--dark-grayish-blue)">Subtotal: {product.numericPrice * product.quantity}.00</p>
+                    <p>Price: ₦{item.numericPrice}.00</p>
+                <p className="text-lg font-semibold text-(--dark-grayish-blue)">Subtotal: ₦{item.numericPrice * item.quantity}.00</p>
               </div>
               <div className="text-right">
 
                 <div className="flex items-center justify-center gap-4 dark:bg-[#809679] bg-[#d1d9ce] rounded px-2 py-1 my-2">
                   <button
-                    onClick={() => handleAdd(product)}
+                    onClick={() => handleAdd (item)}
                     className="cursor-pointer">
                       <Plus  size={18} className="dark:text-[#d1d9ce] text-black" />
                   </button>
 
-                <p className="font-bold text-lg text-(--dark-grayish-blue)">{product.quantity}pc</p>
+                <p className="font-bold text-lg text-(--dark-grayish-blue)">{item.quantity}pc</p>
 
 
-                  <button onClick={() => handleRemove(product)}
+                  <button onClick={() => handleRemove(item)}
                     className="cursor-pointer">
                       <Minus size={18} className="dark:text-[#d1d9ce] text-black" />
                   </button>
                 </div>
                 <button
-                  onClick={() => handleDelete(product)}
+                  onClick={() => handleDelete(item)}
                   className="cursor-pointer">
                   <Trash2 size={18} className="dark:text-[#d1d9ce] text-black" />
                   </button></div>
