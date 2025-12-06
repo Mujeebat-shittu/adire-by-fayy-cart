@@ -1,9 +1,9 @@
-import Create from "@/components/create"
+// import Create from "@/components/create"
 
-function CreatePage () {
-    return(
-        <Create/>
-    )
-} 
+// function CreatePage () {
+//     return(
+//         <Create/>
+//     )
+// } 
 
-export default CreatePage
+// export default CreatePage
