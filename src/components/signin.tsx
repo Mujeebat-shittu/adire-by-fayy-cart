@@ -49,9 +49,13 @@ const SignIn = () => {
 
   };
 
-  const googleSignup = async () => {
+  const googleSignin = async () => {
     await supabase.auth.signInWithOAuth({
-      provider: "google"
+      provider: "google",
+      options: {
+      // Optional: specify redirect URL explicitly (overrides Supabase default)
+      redirectTo: window.location.origin // will use localhost in dev, Netlify in prod
+    }
     })
   };
 
@@ -98,7 +102,7 @@ const SignIn = () => {
 
 
             <button
-              onClick={googleSignup}
+              onClick={googleSignin}
               className="cursor-pointer">
               <div className="flex gap-4 items-center justify-center">
                 <img src={GoogleLogo} alt="" />
