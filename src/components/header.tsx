@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import ThemeToggle from "./themeToggle";
 import { CartItem } from "@/context-and-reducer/reducer";
 import { useCart } from "@/context-and-reducer/CartContext";
+import { useAuth } from "@/context-and-reducer/AuthContext";
 
 
 const links = [
@@ -21,6 +22,7 @@ const specialLink = links[3];
 
 function Header() {
   const { cart } = useCart()
+  const { session, profile } = useAuth()
 
   const totalQuantity = cart.reduce((acc: number, item: CartItem) => {
     return acc + item.quantity;
@@ -73,16 +75,28 @@ function Header() {
       {/* general features for all screen size */}
 
       <div className="flex gap-2 absolute right-2 items-center justify-end">
+        {session  && profile? (
+          <div className="flex items-center gap-2">
+            <img
+            src={profile.avatar_url || "/default-avatar.png"}
+              alt="User avatar"
+              className="w-8 h-8 rounded-full"
+            />
+            <span className="font-medium">
+              {profile.first_name}
+            </span>
+          </div>
+        ) : (
         <button
           className="w-[100px] p-2 rounded-md border bg-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 text-[#d1d9ce] my-4 cursor-pointer hover:scale-[1.05] font-bold"
         >
-          <a
-            href="https://wa.me/2348126458317"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Order Here</a>
+         <NavLink to={"/signin"}>
+            Log in
+         </NavLink> 
+          
+            
         </button>
+        )}
 
         <div className="relative">
           <NavLink

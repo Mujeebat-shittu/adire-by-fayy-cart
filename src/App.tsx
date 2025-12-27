@@ -1,31 +1,41 @@
-import { BrowserRouter, Routes, Route} from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./pages/home"
 import About from "./pages/about"
 import Product from "./pages/product"
 import Cart from "./pages/cart"
-// import Create from "./pages/create"
+import SignUp from "./pages/signup"
+import SignIn from "./pages/signin"
 import Description from "./pages/description"
 import { Toaster } from "react-hot-toast"
-
+import ProtectedRoute from "./components/protectedRoute"
 
 
 function App() {
 
+  
   return (
     <>
-    <BrowserRouter>
-      <Toaster position="top-right" />
-    <Routes>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/about" element={<About/>}/>
-      <Route path="/product" element={<Product/>}/>
-      <Route path="/cart" element={<Cart/>}/>
-      {/* <Route path="/create" element={<Create/>}/> */}
-      <Route path="/product/:id" element={<Description/>}/>
-    </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Toaster position="top-right" />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/product/:id" element={<Description />} />
+
+          {/* protected route that requires authentication and signing in */}
+
+          <Route element={<ProtectedRoute />}>
+            <Route path="/cart" element={<Cart />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
+
+  
 }
 
 export default App
