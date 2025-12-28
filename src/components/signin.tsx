@@ -55,6 +55,7 @@ const SignIn = () => {
       options: {
       // Optional: specify redirect URL explicitly (overrides Supabase default)
       redirectTo: window.location.origin // will use localhost in dev, Netlify in prod
+      //  redirectTo: "https://adire-by-fayy-cart.netlify.app"
     }
     })
   };

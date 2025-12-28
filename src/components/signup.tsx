@@ -81,7 +81,7 @@ const Signup = () => {
               value={firstName}
               name='firstName'
               type='text'
-              id='email'
+              id='firstName'
               placeholder='First Name'
               className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
             />

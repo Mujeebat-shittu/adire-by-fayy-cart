@@ -1,4 +1,5 @@
 import Logo from "../assets/logo.jpg"
+import Avatar from "@/assets/user.png"
 import { Menu, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -47,7 +48,7 @@ function Header() {
       <div className="hidden lg:flex flex-row px-6 py-4 gap-2 justify-between items-center text-white  bg-[rgba(255,255,255,0.06)] w-full mx-auto">
         <div className="flex items-end justify-center mx-auto">
           <ul className="flex flex-row gap-10 cursor-pointer">
-            {links.map((link) => (
+            {menuLinks.map((link) => (
               <li key={link.id}>
                 <NavLink
                   to={link.path}
@@ -75,15 +76,15 @@ function Header() {
       {/* general features for all screen size */}
 
       <div className="flex gap-2 absolute right-2 items-center justify-end">
-        {session  && profile? (
+        {session ? (
           <div className="flex items-center gap-2">
             <img
-            src={profile.avatar_url || "/default-avatar.png"}
+            src={profile?.avatar_url || Avatar}
               alt="User avatar"
               className="w-8 h-8 rounded-full"
             />
             <span className="font-medium">
-              {profile.first_name}
+              {profile?.first_name || "User"}
             </span>
           </div>
         ) : (
