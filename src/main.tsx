@@ -9,13 +9,13 @@ import { CartProvider } from "@/context-and-reducer/CartContext.tsx"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AuthProvider>
     <CartProvider>
+    <AuthProvider>
     {/* <ProductProvider> */}
     <App />
     {/* </ProductProvider> */}
-    </CartProvider>
     </AuthProvider>
+    </CartProvider>
 
   </StrictMode>
 )

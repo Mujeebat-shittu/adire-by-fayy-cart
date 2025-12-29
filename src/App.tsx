@@ -12,11 +12,40 @@ import ProtectedRoute from "./components/protectedRoute"
 
 function App() {
 
-  
+
   return (
     <>
       <BrowserRouter>
-        <Toaster position="top-right" />
+        <Toaster
+        position="top-right"
+          toastOptions={{
+            // Default options for all toasts
+            style: {
+              border: '1px solid #713200',
+              padding: '8px',
+              color: '#713200',
+              background: '#fefefe',
+            },
+            // Options for specific types
+            success: {
+              style: {
+                background: 'green',
+                color: 'white',
+              },
+              iconTheme: {
+                primary: 'white',
+                secondary: 'green',
+              },
+            },
+            error: {
+              style: {
+                background: 'white',
+                color: 'red',
+                borderColor: 'red'
+              },
+            },
+          }}
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -35,7 +64,7 @@ function App() {
     </>
   )
 
-  
+
 }
 
 export default App

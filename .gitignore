@@ -23,5 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# unfinished pages, components and updates
 create.tsx
 wrapper.tsx
+reset-password.tsx

@@ -16,17 +16,6 @@ function Product() {
     const { products, loading, error } = useProducts();
     const [filterStatus, setFilterStatus] = useState("all"); // all | skirt | pants | gowns
 
-    {/* const [user, setUser] = useState<User | null>(null);
-
-useEffect(() => {
-  const getSession = async () => {
-    const { data } = await supabase.auth.getSession();
-    setUser(data.session?.user ?? null);
-  };
-
-  getSession();
-}, []); */}
-
     if (error) return <p className="h-screen flex items-center justify-center text-lg">
         {error} <br /> Go back to <NavLink to="/" className="flex items-center justify-center">Home</NavLink></p>;
     if (loading) return <p className="h-screen flex items-center justify-center">Loading...</p>;

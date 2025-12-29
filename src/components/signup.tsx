@@ -1,50 +1,78 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import supabase from '@/config/supabaseClient'
 import { useState } from 'react'
 import GoogleLogo from '@/assets/google-logo.svg'
+import toast from 'react-hot-toast'
 
 
 const Signup = () => {
 
 
-
+  const navigate = useNavigate()
   const [firstName, setFirstName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [message, setMessage] = useState("")
+  // const [message, setMessage] = useState("")
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+  })
   const [loading, setLoading] = useState(false);
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setMessage("");
+    // setError(null);
     setLoading(true)
+
+    const newErrors = {email, password, firstName};
+    if (!email) {
+      newErrors.email = "Email is required"
+    }
+
+    if (!password) {
+      newErrors.password = "Password is required"
+    }
+
+    if (password.length < 6) {
+      newErrors.password = "Password is too short"
+    }
+
+    if (!firstName) {
+      newErrors.password = "FirstName is required"
+    }
+
+    setError(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+    toast.error("Please fix the highlighted fields");
+    return;
+  }
+
 
     const { data, error } = await supabase.auth.signUp({
       email: email.toLowerCase(),
       password: password,
+      options: {
+    data: {
+      first_name: firstName,
+      avatar_url: "/default-avatar.png",
+    },
+  },
 
     });
 
     if (error) {
-      setMessage(error.message)
+      toast(error.message)
       return;
     }
 
     if (data?.user) {
-      const { error: insertError } = await supabase.from("users").insert({
-        id: data.user.id,
-        first_name: firstName,
-        avatar_url: "/default-avatar.png"
-      });
+      
+    toast("User account created!");
+    navigate ("/signin")
 
-
-      if (insertError) {
-        setMessage(insertError.message);
-        setLoading(false);
-        return;
-      }
-      setMessage("User account created!");
     }
     setEmail("");
     setPassword("");
@@ -61,9 +89,6 @@ const Signup = () => {
   };
 
 
-
-
-
   return (
     <>
       <main className="bg-linear-to-r to-white from-[#d1d9ce] dark:bg-linear-to-r dark:to-[#1a1a1a] dark:from-[#809679] text-[#1a1a1a] flex min-h-screen items-center justify-center flex-col gap-2 ">
@@ -73,8 +98,6 @@ const Signup = () => {
           <p className="">
             Already have an account? <Link to="/signin">Sign in!</Link>
           </p>
-          {message && <p className=''>{message}</p>}
-
           <div className="flex flex-col py-4">
             <input
               onChange={(e) => setFirstName(e.target.value)}
@@ -85,6 +108,7 @@ const Signup = () => {
               placeholder='First Name'
               className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
             />
+            {error.firstName && <p className=''>{error.firstName}</p>}
 
             <input
               onChange={(e) => setEmail(e.target.value)}
@@ -95,6 +119,7 @@ const Signup = () => {
               placeholder='Email'
               className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
             />
+            {error.email && <p className=''>{error.email}</p>}
 
             <input
               onChange={(e) => setPassword(e.target.value)}
@@ -104,6 +129,7 @@ const Signup = () => {
               id='password'
               placeholder='Password'
               className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm" />
+              {error.password && <p className=''>{error.password}</p>}
 
             <button
               type='submit'
@@ -116,7 +142,7 @@ const Signup = () => {
               className="cursor-pointer">
               <div className="flex gap-4 items-center justify-center">
                 <img src={GoogleLogo} alt="" />
-                Sign Up with Google
+                {loading ? "Loading" : "Sign Up with Google"}
               </div>
 
             </button>
