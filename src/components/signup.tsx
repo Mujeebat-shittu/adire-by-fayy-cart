@@ -3,6 +3,7 @@ import supabase from '@/config/supabaseClient'
 import { useState } from 'react'
 import GoogleLogo from '@/assets/google-logo.svg'
 import toast from 'react-hot-toast'
+import { Eye, EyeClosed } from 'lucide-react'
 
 
 const Signup = () => {
@@ -19,6 +20,10 @@ const Signup = () => {
     firstName: "",
   })
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleMenu = () => {
+    setShowPassword((prev) => !prev);
+  };
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,7 +31,7 @@ const Signup = () => {
     // setError(null);
     setLoading(true)
 
-    const newErrors = {email, password, firstName};
+    const newErrors = { email, password, firstName };
     if (!email) {
       newErrors.email = "Email is required"
     }
@@ -46,20 +51,20 @@ const Signup = () => {
     setError(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
-    toast.error("Please fix the highlighted fields");
-    return;
-  }
+      toast.error("Please fix the highlighted fields");
+      return;
+    }
 
 
     const { data, error } = await supabase.auth.signUp({
       email: email.toLowerCase(),
       password: password,
       options: {
-    data: {
-      first_name: firstName,
-      avatar_url: "/default-avatar.png",
-    },
-  },
+        data: {
+          first_name: firstName,
+          avatar_url: "/default-avatar.png",
+        },
+      },
 
     });
 
@@ -69,9 +74,9 @@ const Signup = () => {
     }
 
     if (data?.user) {
-      
-    toast("User account created!");
-    navigate ("/signin")
+
+      toast("User account created!");
+      navigate("/signin")
 
     }
     setEmail("");
@@ -92,11 +97,11 @@ const Signup = () => {
   return (
     <>
       <main className="bg-linear-to-r to-white from-[#d1d9ce] dark:bg-linear-to-r dark:to-[#1a1a1a] dark:from-[#809679] text-[#1a1a1a] flex min-h-screen items-center justify-center flex-col gap-2 ">
-      
+
         <form onSubmit={handleSubmit} className="flex absolute flex-col min-w-[350px] md:min-w-[500px] h-[450px] sm:h-[350px] items-center justify-center shadow-2xl bg-[hsl(104,12%,83%)] dark:bg-[#809679] text-black rounded-lg">
           <h2 className="text-lg font-bold">Sign up for an account</h2>
           <p className="">
-            Already have an account? <Link to="/signin">Sign in!</Link>
+            Already have an account? <Link className='underline' to="/signin">Sign in!</Link>
           </p>
           <div className="flex flex-col py-4">
             <input
@@ -121,15 +126,27 @@ const Signup = () => {
             />
             {error.email && <p className=''>{error.email}</p>}
 
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              name='password'
-              type='password'
-              id='password'
-              placeholder='Password'
-              className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm" />
+            <div className="relative flex items-center justify-center">
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                name='password'
+                type={showPassword ? 'text' : 'password'}
+                id='password'
+                placeholder='Password'
+                className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
+              />
               {error.password && <p className=''>{error.password}</p>}
+
+              <button
+                type="button"
+                onClick={toggleMenu}
+                className="absolute right-3 bottom-0 -translate-y-1/2 cursor-pointer"
+              >
+                {showPassword ? <EyeClosed size={15} /> : <Eye size={15} />}
+              </button>
+
+            </div>
 
             <button
               type='submit'
@@ -140,7 +157,8 @@ const Signup = () => {
             <button
               onClick={googleSignup}
               className="cursor-pointer">
-              <div className="flex gap-4 items-center justify-center">
+              <div
+                className="flex gap-4 items-center justify-center border-black border p-2 rounded-md ">
                 <img src={GoogleLogo} alt="" />
                 {loading ? "Loading" : "Sign Up with Google"}
               </div>

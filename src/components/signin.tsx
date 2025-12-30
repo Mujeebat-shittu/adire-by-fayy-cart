@@ -3,6 +3,7 @@ import supabase from '@/config/supabaseClient'
 import { useState } from 'react'
 import GoogleLogo from '@/assets/google-logo.svg'
 import toast from 'react-hot-toast'
+import { EyeClosed, Eye } from 'lucide-react'
 
 type FormErrors = {
   email?: string;
@@ -19,6 +20,10 @@ const SignIn = () => {
     password: "",
   })
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleMenu = () => {
+    setShowPassword((prev) => !prev);
+  };
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -136,17 +141,28 @@ const SignIn = () => {
             />
             {error.email && <p className=''>{error.email}</p>}
 
-            <input
+            <div className="relative flex items-center justify-center">
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                name='password'
+                type={showPassword ? 'text' : 'password'}
+                id='password'
+                placeholder='Password'
+                className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
+              />
+              {error.password && <p className=''>{error.password}</p>}
 
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              name='password'
-              type='password'
-              id='password'
-              placeholder='Password'
-              className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
-            />
-            {error.password && <p className=''>{error.password}</p>}
+              <button
+                type="button"
+                onClick={toggleMenu}
+                className="absolute right-3 bottom-0 -translate-y-1/2 cursor-pointer"
+              >
+                {showPassword ? <EyeClosed size={15} /> : <Eye size={15} />}
+              </button>
+
+            </div>
+
 
 
             <button
@@ -160,7 +176,6 @@ const SignIn = () => {
               onClick={googleSignin}
               className="cursor-pointer">
               <div
-
                 className="flex gap-4 items-center justify-center border-black border p-2 rounded-md ">
                 <img src={GoogleLogo} alt="" />
                 Continue with Google
@@ -168,12 +183,12 @@ const SignIn = () => {
             </button>
 
             {/* <button
-  type="button"
-  onClick={handleForgotPassword}
-  className="text-sm text-blue-500"
->
-  Forgot password?
-</button> */}
+              type="button"
+              onClick={handleForgotPassword}
+              className="text-sm text-blue-500"
+            >
+              Forgot password?
+            </button> */}
 
           </div>
 

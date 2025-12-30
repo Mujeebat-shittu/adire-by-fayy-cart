@@ -1,39 +1,47 @@
-import Logo from "../assets/logo.jpg"
-import Avatar from "@/assets/user.png"
-import { Menu, X, ShoppingCart } from "lucide-react";
+import Logo from "../assets/logo.jpg";
+import Avatar from "@/assets/user.png";
+import { Menu, X, ShoppingCart, LogOut } from "lucide-react";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import ThemeToggle from "./themeToggle";
 import { CartItem } from "@/context-and-reducer/reducer";
 import { useCart } from "@/context-and-reducer/CartContext";
 import { useAuth } from "@/context-and-reducer/AuthContext";
-
+import toast from "react-hot-toast";
 
 const links = [
   { id: 1, name: "HOME", path: "/", end: true },
   { id: 2, name: "ABOUT", path: "/about" },
   { id: 3, name: "PRODUCT", path: "/product" },
   { id: 4, name: "CART", path: "/cart" },
-
 ];
 
 const menuLinks = links.slice(0, 3);
 const specialLink = links[3];
 
-
 function Header() {
-  const { cart } = useCart()
-  const { session, profile } = useAuth()
-
-  const totalQuantity = cart.reduce((acc: number, item: CartItem) => {
-    return acc + item.quantity;
-  }, 0);
-
+  const { cart } = useCart();
+  const { session, profile, signOut, loading } = useAuth();
   const [toggle, setToggle] = useState(false);
-  const toggleMenu = () => {
-    setToggle((prev) => !prev);
-  };
+  const navigate = useNavigate();
 
+  // cart total
+  const totalQuantity = cart.reduce((acc: number, item: CartItem) => acc + item.quantity, 0);
+
+  const toggleMenu = () => setToggle(prev => !prev);
+
+  const handleSignOut = async () => {
+    const confirmSignOut = window.confirm("Are you sure you want to sign out?");
+    if (!confirmSignOut) return;
+
+    try {
+      await signOut();
+      toast.success("Signed out successfully");
+      navigate("/signin");
+    } catch {
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#d0d8cd] dark:bg-[#809679] h-18 lg:h-20 flex items-center justify-between px-4">
@@ -42,13 +50,11 @@ function Header() {
         <img src={Logo} alt="Logo" className="w-15 ml-4" />
       </div>
 
-
-      {/* nav desktop */}
-
-      <div className="hidden lg:flex flex-row px-6 py-4 gap-2 justify-between items-center text-white  bg-[rgba(255,255,255,0.06)] w-full mx-auto">
+      {/* Nav desktop */}
+      <div className="hidden lg:flex flex-row px-6 py-4 gap-2 justify-between items-center text-white bg-[rgba(255,255,255,0.06)] w-full mx-auto">
         <div className="flex items-end justify-center mx-auto">
           <ul className="flex flex-row gap-10 cursor-pointer">
-            {menuLinks.map((link) => (
+            {menuLinks.map(link => (
               <li key={link.id}>
                 <NavLink
                   to={link.path}
@@ -60,69 +66,56 @@ function Header() {
                     }`
                   }
                 >
-                  <div className="flex gap-2">
-                    <span className="font-normal">{link.name}</span>
-                  </div>
-
+                  <span className="font-normal">{link.name}</span>
                 </NavLink>
               </li>
             ))}
-
           </ul>
-
         </div>
       </div>
 
-      {/* general features for all screen size */}
-
+      {/* General features */}
       <div className="flex gap-2 absolute right-2 items-center justify-end">
+        {/* Profile / Login */}
         {session ? (
           <div className="flex items-center gap-2">
-            <img
-            src={profile?.avatar_url || Avatar}
-              alt="User avatar"
-              className="w-8 h-8 rounded-full"
-            />
-            <span className="font-medium">
-              {profile?.first_name || "User"}
-            </span>
+            <img src={Avatar} alt="User avatar" className="w-8 h-8 rounded-full" />
+            <span className="font-medium">{profile?.first_name || "User"}</span>
+
+            {/* Sign-out icon button */}
+            <button
+              onClick={handleSignOut}
+              disabled={loading}
+              className="hidden lg:flex p-2 rounded-md border-gray-700 dark:bg-gray-900 dark:text-[#d1d9ce] hover:bg-[#1a1a1a] hover:text-[#d1d9ce] disabled:opacity-50"
+            >
+              {loading ? "Signing out..." : <LogOut size={15} strokeWidth={3} />}
+
+            </button>
           </div>
         ) : (
-        <button
-          className="w-[100px] p-2 rounded-md border bg-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 text-[#d1d9ce] my-4 cursor-pointer hover:scale-[1.05] font-bold"
-        >
-         <NavLink to={"/signin"}>
+          <Link
+            to="/signin"
+            className="w-[100px] p-2 rounded-md border bg-black text-[#d1d9ce] hover:scale-[1.05] font-bold text-center"
+          >
             Log in
-         </NavLink> 
-          
-            
-        </button>
+          </Link>
         )}
 
+        {/* Cart */}
         <div className="relative">
-          <NavLink
-          to={specialLink.path}>
-          <span className="text-xs text-[#d1d9ce] bg-black absolute right-0 -top-4 rounded-full px-2 py-1">
-            {totalQuantity}</span>
-          <ShoppingCart className="text-black" />
-        </NavLink>
+          <NavLink to={specialLink.path}>
+            <span className="text-xs text-[#d1d9ce] bg-black absolute right-0 -top-4 rounded-full px-2 py-1">
+              {totalQuantity}
+            </span>
+            <ShoppingCart className="text-black" />
+          </NavLink>
         </div>
 
-        
-
-
-
-        {/* theme toggle component */}
+        {/* Theme toggle */}
         <ThemeToggle />
 
-
-        {/* toggle menu icon */}
-        <div
-          className="icons flex lg:hidden"
-          onClick={toggleMenu}
-        >
-
-          {/* menu and close icons */}
+        {/* Toggle menu icon for mobile */}
+        <div className="icons flex lg:hidden" onClick={toggleMenu}>
           {toggle ? (
             <X strokeWidth={5} className="cursor-pointer ml-4 text-black dark:text-[#d1d9ce]" />
           ) : (
@@ -131,27 +124,17 @@ function Header() {
         </div>
       </div>
 
-
-
-      {/* Mobile Nav */}
-
-
+      {/* Mobile nav */}
       <div
         className={`fixed inset-0 z-40 flex flex-col items-center justify-center bg-[#d0d8cd] dark:bg-[#809679] dark:text-[#d0d8cd] transform transition-all duration-300 ease-in-out ${toggle ? "translate-x-0" : "translate-x-full"
           }`}
       >
-
-        {/* Close button */}
-        <button
-          onClick={toggleMenu}
-          className="absolute top-6 right-6 text-black cursor-pointer"
-        >
+        <button onClick={toggleMenu} className="absolute top-6 right-6 text-black cursor-pointer">
           <X size={32} strokeWidth={3} className="dark:text-black" />
         </button>
 
-        {/* Nav links */}
         <ul className="flex flex-col gap-6 text-lg font-semibold text-gray-800 dark:text-[#d0d8cd]">
-          {menuLinks.map((link) => (
+          {menuLinks.map(link => (
             <li key={link.id}>
               <NavLink
                 to={link.path}
@@ -170,20 +153,25 @@ function Header() {
           ))}
         </ul>
 
-
-        <div className=" flex items-center w-full justify-center font-bold">
+        {session ? (
           <button
-            className="w-[200px] p-2 rounded-md border bg-black text-[#d1d9ce] dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 my-4 cursor-pointer hover:scale-[1.05]"
+            onClick={handleSignOut}
+            disabled={loading}
+            className="w-[200px] p-2 rounded-md border bg-black text-[#d1d9ce] dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 my-4 cursor-pointer hover:scale-[1.05] disabled:opacity-50"
           >
-            <a href="https://wa.me/2348126458317">ORDER HERE</a>
+            {loading ? "Signing out..." : "Sign Out"}
           </button>
-        </div>
-
-
+        ) : (
+          <Link
+            className="w-[200px] p-2 rounded-md border bg-black text-[#d1d9ce] dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 my-4 cursor-pointer hover:scale-[1.05] text-center font-bold"
+            to="/signin"
+          >
+            Login
+          </Link>
+        )}
       </div>
-
-    </header >
-  )
+    </header>
+  );
 }
 
-export default Header
+export default Header;

@@ -4,7 +4,6 @@ import supabase from "@/config/supabaseClient";
 
 type Profile = {
   first_name: string;
-  last_name?: string;
   avatar_url?: string;
 };
 
@@ -12,6 +11,7 @@ type AuthContextType = {
   session: Session | null;
   profile: Profile | null;
   loading: boolean;
+  signOut: () => Promise<void> ;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -20,6 +20,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+
+  //  sign-out function
+
+  const signOut = async () => {
+  setLoading(true); 
+  const { error } = await supabase.auth.signOut();
+  setLoading(false); 
+  if (error) throw error;
+};
+
+
 
   const fetchProfile = async (userId: string) => {
     const { data, error } = await supabase
@@ -61,7 +72,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ session, profile, loading }}>
+    <AuthContext.Provider value={{ session, profile, loading, signOut }}>
       {children}
     </AuthContext.Provider>
   );

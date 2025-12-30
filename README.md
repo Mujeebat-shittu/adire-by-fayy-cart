@@ -1,54 +1,118 @@
-# React + TypeScript + Vite
+# Adire by Fayy Cart
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Adire by Fayy Cart** is a React-based e-commerce application with user authentication, cart management, and a responsive UI. It uses Supabase for authentication and backend storage and includes a dark/light theme toggle, a responsive mobile menu, and interactive notifications.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+### Authentication
+- Sign in / Sign up with email and password using Supabase.
+- Forgot password functionality with email recovery.
+- Session persistence with automatic profile fetching.
+- Sign-out functionality with confirmation and toast notifications.
+- Dynamic display of login/sign-out buttons based on user session.
+- Profile avatar and first name display when logged in.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Cart Management
+- Add items to cart with quantity tracking.
+- Dynamic cart icon showing total items.
+- Cart data persisted across sessions using React Context.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### UI/UX
+- Responsive header and mobile navigation menu.
+- Desktop navigation highlights the active page.
+- Light/Dark theme toggle.
+- Password visibility toggle in login/sign-up forms.
+- Toast notifications for feedback (errors, success messages).
+
+### Navigation
+- Pages: Home, About, Product, Cart.
+- Dynamic NavLink highlighting for the current page.
+- Smooth mobile menu toggle with open/close icons.
+
+### State Management
+- Uses React Context API for authentication and cart state.
+- `loading` states used for async operations (sign-in/sign-out).
+
+### Produc filtering
+
+---
+
+## Tech Stack
+
+- **Frontend:** React, TypeScript, Tailwind CSS, React Router DOM, Lucide-react icons  
+- **Backend & Auth:** Supabase (Auth + Database)  
+- **Notifications:** react-hot-toast  
+- **State Management:** React Context API
+
+---
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/adire-by-fayy-cart.git
+cd adire-by-fayy-cart
+```
+2. Install dependencies
+```bash
+npm install
+# or
+yarn install
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+3. Configure Supabase
+- Create a supabase project
+- Create a users table with at least id, first_name.
+- Copy your Supabase URL and anon key into src/config/supabaseClient.ts:
+```bash
+import { createClient } from '@supabase/supabase-js'
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+const supabaseUrl = 'https://your-supabase-url.supabase.co'
+const supabaseAnonKey = 'your-anon-key'
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export default supabase
 ```
+
+4. Run the development server
+```bash
+npm start
+# or
+yarn start
+
+```
+## Usage
+- Sign Up / Sign In: Users can create an account or log in with existing credentials.
+- Cart: Users can add products to the cart, view cart count, and navigate to the cart page.
+- Profile: Logged-in users see their first name and avatar in the header.
+- Sign Out: Click the log-out icon or button; a confirmation prompt prevents accidental sign-outs.
+- Theme Toggle: Switch between dark and light modes from the header.
+- Mobile Navigation: Click the menu icon to open/close the mobile menu.
+
+## Folder Structure
+src/
+├─ assets/         # Images and icons
+├─ components/     # Header, ThemeToggle, Forms
+├─ context-and-reducer/
+│  ├─ AuthContext.tsx
+│  ├─ CartContext.tsx
+│  └─ reducer.ts
+├─ pages/          # Home, About, Product, Cart, SignIn, SignUp
+├─ config/
+│  └─ supabaseClient.ts
+└─ App.tsx
+
+## Future Improvements
+- Add product search.
+- Add checkout and payment integration.
+- Improve mobile navigation animations.
+- Add more detailed user profile management.
+- Persistent cart across devices for logged-in users.
+
+## License
+This project is open-source and available under the MIT License
+
