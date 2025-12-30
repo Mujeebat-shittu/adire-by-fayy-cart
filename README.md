@@ -35,7 +35,10 @@
 - Uses React Context API for authentication and cart state.
 - `loading` states used for async operations (sign-in/sign-out).
 
-### Produc filtering
+### Product Filtering
+- Filter products by category.
+- Filter products by attributes (e.g., type, style, or tags).
+- Filters update products instantly without page reload.
 
 ---
 
