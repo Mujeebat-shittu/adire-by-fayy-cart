@@ -158,7 +158,7 @@ const SignIn = () => {
                 onClick={toggleMenu}
                 className="absolute right-3 bottom-0 -translate-y-1/2 cursor-pointer"
               >
-                {showPassword ? <Eye size={15} /> : <EyeClosed size={15} />}
+                {showPassword ? <EyeClosed size={15} /> : <Eye size={15} />}
               </button>
 
             </div>
