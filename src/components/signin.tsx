@@ -54,7 +54,7 @@ const SignIn = () => {
 
     // supabse sign-in
     const { error } = await supabase.auth.signInWithPassword({
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     });
 
@@ -139,7 +139,7 @@ const SignIn = () => {
               placeholder='Email'
               className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
             />
-            {error.email && <p className=''>{error.email}</p>}
+            {error.email && <p className='text-red-500'>{error.email}</p>}
 
             <div className="relative flex items-center justify-center">
               <input
@@ -151,17 +151,17 @@ const SignIn = () => {
                 placeholder='Password'
                 className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
               />
-              {error.password && <p className=''>{error.password}</p>}
 
               <button
                 type="button"
                 onClick={toggleMenu}
                 className="absolute right-3 bottom-0 -translate-y-1/2 cursor-pointer"
-              >
+                >
                 {showPassword ? <EyeClosed size={15} /> : <Eye size={15} />}
               </button>
 
             </div>
+                {error.password && <p className='text-red-500'>{error.password}</p>}
 
 
 

@@ -1,13 +1,13 @@
 import Logo from "../assets/logo.jpg";
 import Avatar from "@/assets/user.png";
-import { Menu, X, ShoppingCart, LogOut } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
-import { NavLink, useNavigate, Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import ThemeToggle from "./themeToggle";
+import Logout from "./logout";
 import { CartItem } from "@/context-and-reducer/reducer";
 import { useCart } from "@/context-and-reducer/CartContext";
 import { useAuth } from "@/context-and-reducer/AuthContext";
-import toast from "react-hot-toast";
 
 const links = [
   { id: 1, name: "HOME", path: "/", end: true },
@@ -21,27 +21,14 @@ const specialLink = links[3];
 
 function Header() {
   const { cart } = useCart();
-  const { session, profile, signOut, loading } = useAuth();
+  const { session, profile } = useAuth();
   const [toggle, setToggle] = useState(false);
-  const navigate = useNavigate();
 
   // cart total
   const totalQuantity = cart.reduce((acc: number, item: CartItem) => acc + item.quantity, 0);
 
   const toggleMenu = () => setToggle(prev => !prev);
 
-  const handleSignOut = async () => {
-    const confirmSignOut = window.confirm("Are you sure you want to sign out?");
-    if (!confirmSignOut) return;
-
-    try {
-      await signOut();
-      toast.success("Signed out successfully");
-      navigate("/signin");
-    } catch {
-      toast.error("Something went wrong");
-    }
-  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#d0d8cd] dark:bg-[#809679] h-18 lg:h-20 flex items-center justify-between px-4">
@@ -83,14 +70,7 @@ function Header() {
             <span className="font-medium">{profile?.first_name || "User"}</span>
 
             {/* Sign-out icon button */}
-            <button
-              onClick={handleSignOut}
-              disabled={loading}
-              className="hidden lg:flex p-2 rounded-md border-gray-700 dark:bg-gray-900 dark:text-[#d1d9ce] hover:bg-[#1a1a1a] hover:text-[#d1d9ce] disabled:opacity-50"
-            >
-              {loading ? "Signing out..." : <LogOut size={15} strokeWidth={3} />}
-
-            </button>
+            <Logout/>
           </div>
         ) : (
           <Link
@@ -154,13 +134,7 @@ function Header() {
         </ul>
 
         {session ? (
-          <button
-            onClick={handleSignOut}
-            disabled={loading}
-            className="w-[200px] p-2 rounded-md border bg-black text-[#d1d9ce] dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 my-4 cursor-pointer hover:scale-[1.05] disabled:opacity-50"
-          >
-            {loading ? "Signing out..." : "Sign Out"}
-          </button>
+          <Logout/>
         ) : (
           <Link
             className="w-[200px] p-2 rounded-md border bg-black text-[#d1d9ce] dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 my-4 cursor-pointer hover:scale-[1.05] text-center font-bold"
