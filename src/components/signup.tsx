@@ -13,7 +13,6 @@ const Signup = () => {
   const [firstName, setFirstName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  // const [message, setMessage] = useState("")
   const [error, setError] = useState({
     email: "",
     password: "",
@@ -28,7 +27,6 @@ const Signup = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // setError(null);
     setLoading(true)
 
     const newErrors = { email, password, firstName };
@@ -44,14 +42,19 @@ const Signup = () => {
       newErrors.password = "Password is too short"
     }
 
+    if (password.length === 0) {
+      newErrors.password = "Password is required"
+    }
+
     if (!firstName) {
-      newErrors.password = "FirstName is required"
+      newErrors.firstName = "FirstName is required"
     }
 
     setError(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
       toast.error("Please fix the highlighted fields");
+      setLoading(false)
       return;
     }
 
@@ -113,7 +116,7 @@ const Signup = () => {
               placeholder='First Name'
               className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
             />
-            {error.firstName && <p className=''>{error.firstName}</p>}
+            {error.firstName && <p className='text-red-500'>{error.firstName}</p>}
 
             <input
               onChange={(e) => setEmail(e.target.value)}
@@ -124,7 +127,7 @@ const Signup = () => {
               placeholder='Email'
               className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
             />
-            {error.email && <p className=''>{error.email}</p>}
+            {error.email && <p className='text-red-500'>{error.email}</p>}
 
             <div className="relative flex items-center justify-center">
               <input
@@ -136,17 +139,17 @@ const Signup = () => {
                 placeholder='Password'
                 className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
               />
-              {error.password && <p className=''>{error.password}</p>}
 
               <button
                 type="button"
                 onClick={toggleMenu}
                 className="absolute right-3 bottom-0 -translate-y-1/2 cursor-pointer"
-              >
+                >
                 {showPassword ? <EyeClosed size={15} /> : <Eye size={15} />}
               </button>
 
             </div>
+                {error.password && <p className='text-red-500'>{error.password}</p>}
 
             <button
               type='submit'
