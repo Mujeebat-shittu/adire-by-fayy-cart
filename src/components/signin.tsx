@@ -21,9 +21,12 @@ const SignIn = () => {
   })
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [disableB, setDisableB] = useState(false);
+
   const toggleMenu = () => {
     setShowPassword((prev) => !prev);
   };
+
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -92,6 +95,9 @@ const SignIn = () => {
 
 
   const googleSignin = async () => {
+
+    setDisableB(true)
+
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -100,6 +106,8 @@ const SignIn = () => {
         //  redirectTo: "https://adire-by-fayy-cart.netlify.app"
       }
     })
+
+
   };
 
   //   const handleForgotPassword = async () => {
@@ -174,6 +182,7 @@ const SignIn = () => {
 
             <button
               onClick={googleSignin}
+              disabled={disableB}
               className="cursor-pointer">
               <div
                 className="flex gap-4 items-center justify-center border-black border p-2 rounded-md ">
