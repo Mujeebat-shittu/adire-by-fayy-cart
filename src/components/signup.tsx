@@ -5,7 +5,12 @@ import GoogleLogo from '@/assets/google-logo.svg'
 import toast from 'react-hot-toast'
 import { Eye, EyeClosed } from 'lucide-react'
 
-
+type FormErrors = {
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  firstName?: string
+}
 const Signup = () => {
 
 
@@ -13,37 +18,40 @@ const Signup = () => {
   const [firstName, setFirstName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [error, setError] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-  })
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [error, setError] = useState<FormErrors>({})
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [disableB, setDisableB] = useState(false);
+  
+  
   const toggleMenu = () => {
     setShowPassword((prev) => !prev);
   };
-
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true)
 
-    const newErrors = { email, password, firstName };
+
+    const newErrors: FormErrors = {};
     if (!email) {
       newErrors.email = "Email is required"
     }
 
     if (!password) {
       newErrors.password = "Password is required"
-    }
-
-    if (password.length < 6) {
+    } else if (password.length < 6) {
       newErrors.password = "Password is too short"
     }
 
-    if (password.length === 0) {
-      newErrors.password = "Password is required"
+    if (!confirmPassword) {
+      newErrors.confirmPassword = "Confirm your Password"
+    }
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match"
+      
     }
 
     if (!firstName) {
@@ -73,6 +81,7 @@ const Signup = () => {
 
     if (error) {
       toast(error.message)
+      setLoading(false)
       return;
     }
 
@@ -91,6 +100,8 @@ const Signup = () => {
 
 
   const googleSignup = async () => {
+    setDisableB(true);
+
     await supabase.auth.signInWithOAuth({
       provider: "google"
     })
@@ -101,7 +112,7 @@ const Signup = () => {
     <>
       <main className="bg-linear-to-r to-white from-[#d1d9ce] dark:bg-linear-to-r dark:to-[#1a1a1a] dark:from-[#809679] text-[#1a1a1a] flex min-h-screen items-center justify-center flex-col gap-2 ">
 
-        <form onSubmit={handleSubmit} className="flex absolute flex-col min-w-[350px] md:min-w-[500px] h-[450px] sm:h-[350px] items-center justify-center shadow-2xl bg-[hsl(104,12%,83%)] dark:bg-[#809679] text-black rounded-lg">
+        <form onSubmit={handleSubmit} className="flex absolute flex-col min-w-[350px] md:min-w-[500px] min-h-[450px] sm:h-[350px] items-center justify-center shadow-2xl bg-[hsl(104,12%,83%)] dark:bg-[#809679] text-black rounded-lg">
           <h2 className="text-lg font-bold">Sign up for an account</h2>
           <p className="">
             Already have an account? <Link className='underline' to="/signin">Sign in!</Link>
@@ -114,6 +125,8 @@ const Signup = () => {
               type='text'
               id='firstName'
               placeholder='First Name'
+              aria-label='First Name'
+              aria-placeholder='First Name'
               className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
             />
             {error.firstName && <p className='text-red-500'>{error.firstName}</p>}
@@ -125,6 +138,8 @@ const Signup = () => {
               type='email'
               id='email'
               placeholder='Email'
+              aria-placeholder='Email'
+              aria-label='Email'
               className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
             />
             {error.email && <p className='text-red-500'>{error.email}</p>}
@@ -137,6 +152,7 @@ const Signup = () => {
                 type={showPassword ? 'text' : 'password'}
                 id='password'
                 placeholder='Password'
+                aria-placeholder='Password'
                 className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
               />
 
@@ -144,21 +160,48 @@ const Signup = () => {
                 type="button"
                 onClick={toggleMenu}
                 className="absolute right-3 bottom-0 -translate-y-1/2 cursor-pointer"
-                >
+              >
                 {showPassword ? <EyeClosed size={15} /> : <Eye size={15} />}
               </button>
 
             </div>
-                {error.password && <p className='text-red-500'>{error.password}</p>}
+            {error.password && <p className='text-red-500'>{error.password}</p>}
+
+            <div className="relative flex items-center justify-center">
+              <input
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={confirmPassword}
+                name='confirm-password'
+                type={showPassword ? 'text' : 'password'}
+                id='confirm-password'
+                placeholder='Confirm Password'
+                aria-placeholder='Confirm Password'
+                className="px-3 py-2 mt-4 border border-[#1a1a1a] rounded-sm"
+              />
+
+              <button
+                type="button"
+                onClick={toggleMenu}
+                className="absolute right-3 bottom-0 -translate-y-1/2 cursor-pointer"
+              >
+                {showPassword ? <EyeClosed size={15} /> : <Eye size={15} />}
+              </button>
+
+            </div>
+            {error.confirmPassword && <p className='text-red-500'>{error.confirmPassword}</p>}
+
 
             <button
               type='submit'
-              className="mt-4 w-full p-2 rounded-md border bg-black dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 text-[#d1d9ce] my-4 cursor-pointer hover:scale-[1.05] font-bold">
+              className={`mt-4 w-full bg-black text-[#d1d9ce] p-2 rounded-md border dark:hover:bg-[#d1d9ce]/60 dark:hover:text-gray-700 my-4 cursor-pointer hover:scale-[1.05] font-bold 
+               `}
+            >
               {loading ? "Creating" : "Sign Up"}
             </button>
 
             <button
               onClick={googleSignup}
+              disabled={disableB}
               className="cursor-pointer">
               <div
                 className="flex gap-4 items-center justify-center border-black border p-2 rounded-md ">
